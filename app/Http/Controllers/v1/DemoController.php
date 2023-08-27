@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\v1;
+
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\V1Controller;
@@ -9,7 +11,10 @@ use Illuminate\Support\Facades\Validator;
 
 class DemoController extends V1Controller
 {
-    public function __construct() {
+    public $responseHelper;
+    public $validationHelper;
+    public function __construct()
+    {
         $this->responseHelper = new ResponseHelper;
         $this->validationHelper = new ValidationHelper;
     }
@@ -50,13 +55,13 @@ class DemoController extends V1Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             "firstname" => "required",
-            "lastname"=> "required"
+            "lastname" => "required"
         ]);
-        
+
         if ($validator->fails()) {
             return $this->validationHelper->response($validator);
         };
-       
+
         $dataRes['firstname'] = $input['firstname'];
         $dataRes['lastname'] = $input['lastname'];
         return $this->responseHelper->successWithData($dataRes);

@@ -19,6 +19,6 @@ use App\Http\Controllers\v1\DemoController;
 //     return $request->user();
 // });
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->group(function () {
     Route::get('/greet', [DemoController::class, 'greet']);
 });

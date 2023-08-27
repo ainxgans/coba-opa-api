@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,4 +44,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function skills(): HasMany
+    {
+        return $this->hasMany(Ecc_profile_skills::class);
+    }
+    public function last_edu(): HasMany
+    {
+        return $this->hasMany(Ecc_profile_last_edu::class);
+    }
+    public function bio(): HasOne
+    {
+        return $this->hasOne(Ecc_profile_bio::class);
+    }
 }
